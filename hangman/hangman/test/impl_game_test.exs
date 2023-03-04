@@ -54,7 +54,8 @@ defmodule Hangman.Impl.Game.Test do
     { game, _tally } = Game.make_move(game, "d")
     { game, _tally } = Game.make_move(game, "o")
     { game, _tally } = Game.make_move(game, "y")
-    assert MapSet.equal? game.used, MapSet.new(["d", "o", "y"])
+
+    assert Enum.sort(game.used) == Enum.sort(["d", "o", "y"])
   end
 
 end
