@@ -1,6 +1,7 @@
 defmodule B1Web.HangmanView do
   use B1Web, :view
 
+
   def continue_or_try_again(conn, status) when status in [ :won, :lost ] do
     button("Try again", to: Routes.hangman_path(conn, :new))
   end
@@ -16,6 +17,8 @@ defmodule B1Web.HangmanView do
     )
   end
 
+  #################################################################################
+
   @status_fields %{
     initializing: { "initializing", "Guess the word, a letter at a time" },
     good_guess:   { "good-guess",   "Good guess!" },
@@ -30,115 +33,8 @@ defmodule B1Web.HangmanView do
     "<div class='status #{class}'>#{msg}</div>"
   end
 
-  def figure_for(0) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-     /|\\   |
-     / \\   |
-           |
-           |
-    ========
-    }
-  end
+  #################################################################################
 
-  def figure_for(1) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-     /|\\   |
-     /     |
-           |
-           |
-    ========
-    }
-  end
+  defdelegate figure_for(turns_left), to: B1Web.HangmanView.Helpers.FigureFor
 
-  def figure_for(2) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-     /|\\   |
-           |
-           |
-           |
-    ========
-    }
-  end
-
-  def figure_for(3) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-     /|    |
-           |
-           |
-           |
-    ========
-    }
-  end
-
-  def figure_for(4) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-      |    |
-           |
-           |
-           |
-    ========
-    }
-  end
-
-  def figure_for(5) do
-    ~s{
-      ______
-      |    |
-      |    |
-      O    |
-           |
-           |
-           |
-           |
-    ========
-    }
-  end
-
-  def figure_for(6) do
-    ~s{
-      ______
-      |    |
-      |    |
-           |
-           |
-           |
-           |
-           |
-    ========
-    }
-  end
-
-  def figure_for(7) do
-    ~s{
-      ______
-      |    |
-           |
-           |
-           |
-           |
-           |
-           |
-    ========
-    }
-  end
 end
