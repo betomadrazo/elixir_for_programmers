@@ -10,11 +10,6 @@ defmodule MemoryWeb.Live.MemoryDisplay do
     { :noreply, schedule_tick_and_update_assign(socket) }
   end
 
-  defp schedule_tick_and_update_assign(socket) do
-    Process.send_after(self(), :tick, 1000)
-    assign(socket, :memory, :erlang.memory())
-  end
-
   def render(assigns) do
     ~L"""
     <table>
@@ -26,5 +21,10 @@ defmodule MemoryWeb.Live.MemoryDisplay do
     <% end %>
     </table>
     """
+  end
+
+  defp schedule_tick_and_update_assign(socket) do
+    Process.send_after(self(), :tick, 1000)
+    assign(socket, :memory, :erlang.memory())
   end
 end
